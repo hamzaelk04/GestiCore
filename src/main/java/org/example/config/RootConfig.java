@@ -20,20 +20,6 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"org.example.service", "org.example.repository"})
 public class RootConfig {
 
-    @Bean(destroyMethod = "close")
-    public DataSource dataSource() {
-        HikariConfig cfg = new HikariConfig();
-
-        cfg.setJdbcUrl("jdbc:h2:mem:appdb;DB_CLOSE_DELAY=-1");
-        cfg.setDriverClassName("org.h2.Driver");
-        cfg.setUsername("sa");
-        cfg.setPassword("");
-        cfg.setMaximumPoolSize(10);
-        cfg.setMinimumIdle(2);
-        cfg.setPoolName("AppHikariPool");
-        return new HikariDataSource(cfg);
-    }
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();

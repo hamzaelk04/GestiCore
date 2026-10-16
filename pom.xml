@@ -57,6 +57,7 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- JSON pour les contrôleurs REST -->
@@ -113,6 +114,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <configuration><parameters>true</parameters></configuration>
                 <version>3.14.0</version>
             </plugin>
 
