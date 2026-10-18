@@ -1,7 +1,9 @@
 package org.example.model;
 
 import jakarta.persistence.*;
+import org.example.model.enums.Role;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -17,11 +19,28 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private Role role;
+
+    @Column(nullable = false)
+    private boolean active;
+
+    private LocalDate createdAt;
+
+    private LocalDate updatedAt;
+
     public User() {}
 
-    public User(String name, String email) {
-        this.name = name;
+    public User(LocalDate createdAt, boolean active, Role role, String password, String email, String name) {
+        this.createdAt = createdAt;
+        this.active = active;
+        this.role = role;
+        this.password = password;
         this.email = email;
+        this.name = name;
     }
 
     public UUID getId() {
@@ -46,5 +65,45 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
