@@ -19,11 +19,11 @@ public class UserService {
         this.repository = repository;
     }
 
-    public User create(String name, String email) {
-        if (name == null || name.isBlank()) {
+    public User create(User user) {
+        if (user.getName() == null || user.getName().isBlank()) {
             throw new IllegalArgumentException("Le nom est obligatoire");
         }
-        return repository.save(new User(name, email));
+        return repository.save(user);
     }
 
     @Transactional(readOnly = true)

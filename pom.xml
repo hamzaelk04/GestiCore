@@ -15,6 +15,12 @@
 
         <spring.version>6.2.11</spring.version>
         <hibernate.version>6.6.29.Final</hibernate.version>
+        <spring-data-jpa.version>3.5.5</spring-data-jpa.version>
+        <spring-security.version>6.5.5</spring-security.version>
+        <hibernate-validator.version>8.0.2.Final</hibernate-validator.version>
+        <expressly.version>5.0.0</expressly.version>
+        <jsonpath.version>2.9.0</jsonpath.version>
+        <hamcrest.version>2.2</hamcrest.version>
         <hikari.version>6.3.0</hikari.version>
         <h2.version>2.3.232</h2.version>
         <jackson.version>2.18.4</jackson.version>
@@ -25,6 +31,18 @@
         <logback.version>1.5.18</logback.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -32,10 +50,18 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring Data JPA (repositories) -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
         </dependency>
 
         <!-- Hibernate (ramène aussi jakarta.persistence-api) -->
@@ -43,6 +69,25 @@
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- BCrypt only (not the full Spring Security) -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <!-- Validation of the DTOs -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.expressly</groupId>
+            <artifactId>expressly</artifactId>
+            <version>${expressly.version}</version>
         </dependency>
 
         <!-- Pool de connexions -->
@@ -104,6 +149,27 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- LocalDateTime in JSON (createdAt / updatedAt) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Tests: jsonPath(...) assertions in MockMvc -->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${jsonpath.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -1,38 +1,25 @@
 package org.example.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.example.model.User;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-@Repository
-public class UserRepository {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    // Email uniqueness check on creation
+    boolean existsByEmail(String email);
 
-    public User save(User user) {
-        if (user.getId() == null) {
-            entityManager.persist(user);
-            return user;
-        }
+    // Email uniqueness check on update (ignores the user being updated)
+    boolean existsByEmailAndIdNot(String email, Long id);
 
-        return entityManager.merge(user);
-    }
+    // Standard list: active users only
+    List<User> findAllByActiveTrue();
 
-    public Optional<User> findById(UUID id) {
-        return Optional.ofNullable(entityManager.find(User.class, id));
-    }
+    // One active user by id (deactivated users count as "not found")
+    Optional<User> findByIdAndActiveTrue(Long id);
 
-    public List<User> findAll() {
-        return entityManager.createQuery("select u from User u order by u.id", User.class).getResultList();
-    }
-
-    public void delete(User user) {
-        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
-    }
+    // Used by AuthInterceptor to log the user in
+    Optional<User> findByEmailAndActiveTrue(String email);
 }
