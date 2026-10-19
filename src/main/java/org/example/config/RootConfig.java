@@ -1,7 +1,5 @@
 package org.example.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +15,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"org.example.service", "org.example.repository"})
+@ComponentScan(basePackages = {"org.example.service", "org.example.repository", "org.example.mapper"})
 public class RootConfig {
 
     @Bean

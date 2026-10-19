@@ -42,7 +42,7 @@ public class UserMapper {
         response.setUpdatedAt(user.getUpdatedAt());
         return response;
     }
-    
+
     public List<UserResponse> toResponseList(List<User> users) {
         return users.stream().map(this::toResponse).toList();
     }
