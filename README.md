@@ -1,4 +1,4 @@
-##### Spring Core
+<img width="455" height="602" alt="image" src="https://github.com/user-attachments/assets/9378a008-abde-4538-9796-1d8786a30864" />##### Spring Core
 
 ### 1. Qu’est-ce que Spring Core et à quoi sert-il dans une application Java ?
 
@@ -75,3 +75,82 @@ Dans Spring, il existe trois approches de configuration :
 ### 12. Pourquoi est-il important de comprendre la configuration manuelle ?
 
 Il est important de comprendre la configuration manuelle, car elle permet de comprendre le fonctionnement interne de Spring au lieu de simplement utiliser ses automatismes.
+
+**____________________________________________________________________________________________________________________________________________________________**
+
+##### Spring Data JPA
+
+### 1. Qu’est-ce que Spring Data et quel problème résout-il ?
+
+Spring Data JPA est un module de Spring qui facilite l’accès aux données en fournissant des repositories et des méthodes CRUD prêtes à l’emploi.
+
+Il résout le problème de la création manuelle des requêtes SQL et réduit le code répétitif nécessaire à la persistance des données.
+
+### 2. Quelle est la différence entre JPA et Hibernate ?
+
+La différence principale est que JPA est une spécification qui définit les règles et les interfaces permettant de gérer la persistance des objets Java dans une base de données.
+
+Tandis qu’Hibernate est un framework ORM qui implémente cette spécification et réalise les opérations correspondantes.
+
+### 3. Qu’est-ce qu’une entité JPA ?
+
+Une entité JPA est une classe Java annotée avec `@Entity` qui représente une table dans une base de données. Chaque attribut correspond à une colonne et chaque instance représente un enregistrement.
+
+### 4. À quoi sert le DataSource ?
+
+C’est une interface JDBC qui permet d’obtenir des connexions à une base de données sans devoir gérer manuellement tous les détails de chaque connexion.
+
+### 5. Que fait l’EntityManager ?
+
+C’est une interface JPA qui est responsable de la gestion du cycle de vie des entités persistantes, généralement dans le cadre d’une transaction.
+
+### 6. Quelle est la responsabilité du TransactionManager ?
+
+Il est responsable de la gestion des transactions dans une application. Il démarre une nouvelle transaction, puis la valide avec un *commit* si tout se passe correctement. Sinon, il l’annule avec un *rollback*.
+
+### 7. À quoi sert `@EnableJpaRepositories` ?
+
+Cette annotation active la détection des interfaces Repository de Spring Data JPA et permet à Spring de générer automatiquement leurs implémentations.
+
+### 8. Qu’est-ce qu’un repository Spring Data ?
+
+C’est une interface qui permet d’accéder aux données d’une base de données sans avoir à écrire manuellement toutes les méthodes CRUD.
+
+### 9. Quelles sont les méthodes génériques fournies par `JpaRepository` ?
+
+- **`save(entity)` :** Crée ou met à jour une entité.
+- **`saveAll(entities)` :** Enregistre plusieurs entités.
+- **`findById(id)` :** Recherche une entité par son identifiant.
+- **`findAllById(ids)` :** Recherche plusieurs entités par leurs identifiants.
+- **`findAll()` :** Récupère toutes les entités.
+- **`existsById(id)` :** Vérifie si une entité existe à partir de son identifiant.
+- **`count()` :** Compte le nombre d’entités.
+- **`deleteById(id)` :** Supprime une entité à partir de son identifiant.
+- **`delete(entity)` :** Supprime une entité.
+- **`deleteAll()` :** Supprime toutes les entités.
+- **`flush()` :** Synchronise les modifications en attente avec la base de données.
+
+### 10. Comment gérer les transactions avec Spring ?
+
+1. Activer la gestion des transactions avec `@Transactional`.
+2. Le *commit* valide les changements ; le *rollback* les annule.
+3. Choisir un mode de propagation adapté.
+4. Définir le niveau d’isolation des transactions si nécessaire.
+
+### 11. Pourquoi définir manuellement la connexion à la base de données ?
+
+Pour permettre de contrôler explicitement les composants responsables de la connexion à la base de données.
+
+### 12. Que doit contenir une configuration complète ?
+
+1. **DataSource :** Fournit les connexions à la base de données.
+2. **EntityManagerFactory :** Crée les `EntityManager` et configure la persistance JPA.
+3. **TransactionManager :** Gère les transactions.
+
+### 13. Qu’est-ce que la validation des contraintes dans le modèle ?
+
+La validation des contraintes permet de garantir la cohérence des données. Spring utilise notamment Jakarta Bean Validation avec des annotations comme `@Size`, `@Email`, etc.
+
+### 14. Quelle est la différence entre le soft delete et le hard delete ?
+
+Le **hard delete** (suppression physique) efface réellement l’enregistrement de la base de données, tandis que le **soft delete** (suppression logique) le conserve dans la base de données en le marquant comme supprimé.
