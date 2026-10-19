@@ -1,4 +1,4 @@
-<img width="455" height="602" alt="image" src="https://github.com/user-attachments/assets/9378a008-abde-4538-9796-1d8786a30864" />##### Spring Core
+##### Spring Core
 
 ### 1. Qu’est-ce que Spring Core et à quoi sert-il dans une application Java ?
 
