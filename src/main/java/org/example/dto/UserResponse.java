@@ -4,10 +4,11 @@ import org.example.model.enums.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class UserResponse {
 
-    private Long id;
+    private UUID id;
     private String name;
     private String email;
     private Role role;
@@ -19,11 +20,11 @@ public class UserResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime updatedAt;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
