@@ -9,8 +9,8 @@ import org.example.exception.BadRequestException;
 import org.example.exception.EmailAlreadyUsedException;
 import org.example.exception.UserNotFoundException;
 import org.example.mapper.UserMapper;
-import org.example.model.enums.Role;
 import org.example.model.User;
+import org.example.model.enums.Role;
 import org.example.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -73,10 +73,9 @@ public class UserService {
         requireAdmin(currentUser);
 
         User user = getActiveUser(id);
-        user.setActive(false); // soft delete
+        user.setActive(false);
         userRepository.save(user);
     }
-
 
     @Transactional(readOnly = true)
     public UserResponse getMe(User currentUser) {
@@ -86,7 +85,6 @@ public class UserService {
     public UserResponse updateMe(User currentUser, UserUpdateRequest request) {
         User user = getActiveUser(currentUser.getId());
 
-        // A USER cannot change their own role
         if (request.getRole() != null && request.getRole() != user.getRole()) {
             throw new AccessDeniedException("Vous ne pouvez pas modifier votre rôle");
         }
@@ -97,7 +95,6 @@ public class UserService {
         return userMapper.toResponse(userRepository.save(user));
     }
 
-    // Optional feature
     public void changePassword(User currentUser, PasswordChangeRequest request) {
         User user = getActiveUser(currentUser.getId());
 
@@ -108,8 +105,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
     }
-
-    // ===================== Private helpers =====================
 
     private void requireAdmin(User currentUser) {
         if (currentUser == null || currentUser.getRole() != Role.ADMIN) {

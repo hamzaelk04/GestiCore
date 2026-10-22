@@ -10,8 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"org.example.web", "org.example.controller"})
+@ComponentScan(basePackages = {"org.example.web", "org.example.controller", "org.example.exception"})
 public class WebConfig implements WebMvcConfigurer {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 

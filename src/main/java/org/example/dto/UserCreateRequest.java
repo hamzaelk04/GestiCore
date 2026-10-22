@@ -20,7 +20,6 @@ public class UserCreateRequest {
 
     private Role role;
 
-
     public String getName() {
         return name;
     }
@@ -47,5 +46,9 @@ public class UserCreateRequest {
 
     public Role getRole() {
         return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

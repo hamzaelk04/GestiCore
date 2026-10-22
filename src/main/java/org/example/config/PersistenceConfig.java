@@ -30,14 +30,14 @@ public class PersistenceConfig {
         this.env = env;
     }
 
-    @Bean
+    @Bean(destroyMethod = "close")
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(env.getRequiredProperty("db.url"));
         config.setDriverClassName(env.getRequiredProperty("db.driver"));
         config.setUsername(env.getRequiredProperty("db.username"));
         config.setPassword(env.getProperty("db.password", ""));
-        config.setMaximumPoolSize(10);
+        config.setMaximumPoolSize(env.getProperty("db.pool.size", Integer.class, 10));
         return new HikariDataSource(config);
     }
 
@@ -45,7 +45,7 @@ public class PersistenceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("com.example.usermanagement.model");
+        emf.setPackagesToScan("org.example.model");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties props = new Properties();

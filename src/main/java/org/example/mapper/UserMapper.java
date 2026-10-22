@@ -4,6 +4,7 @@ import org.example.dto.UserCreateRequest;
 import org.example.dto.UserResponse;
 import org.example.dto.UserUpdateRequest;
 import org.example.model.User;
+import org.example.model.enums.Role;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,17 +12,15 @@ import java.util.List;
 @Component
 public class UserMapper {
 
-
     public User toEntity(UserCreateRequest request) {
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
-        user.setRole(request.getRole());
+        user.setRole(request.getRole() != null ? request.getRole() : Role.USER);
         user.setActive(true);
         return user;
     }
-
 
     public void updateEntity(UserUpdateRequest request, User user) {
         user.setName(request.getName());
